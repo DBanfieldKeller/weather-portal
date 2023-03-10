@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/weather-portal/static/css/main.073c9b0a.css",
+    "main.js": "/weather-portal/static/js/main.d135368c.js",
+    "static/js/787.620b5099.chunk.js": "/weather-portal/static/js/787.620b5099.chunk.js",
+    "static/media/logo.svg": "/weather-portal/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "index.html": "/weather-portal/index.html",
+    "main.073c9b0a.css.map": "/weather-portal/static/css/main.073c9b0a.css.map",
+    "main.d135368c.js.map": "/weather-portal/static/js/main.d135368c.js.map",
+    "787.620b5099.chunk.js.map": "/weather-portal/static/js/787.620b5099.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.073c9b0a.css",
+    "static/js/main.d135368c.js"
+  ]
+}
