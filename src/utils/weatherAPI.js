@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const URL = "https://api.openweathermap.org/data/2.5/forecast?q="
+const URL = "https://api.openweathermap.org/data/2.5/weather?q="
 const apiKey = "b442f7cbd3dba47d0df28083d882bce6"
 
 export default async function getForecast(request) {

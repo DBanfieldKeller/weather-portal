@@ -17,16 +17,20 @@ function App() {
     getForecast({
       cityName: location,
       isImperial: unitValue
-    });
+    })
+    .then((res) => setWeatherData(res.data));
   
   useEffect(() => {
-    weatherLookup(currentLocation,isImperial);
-  }, [])
+    weatherLookup(currentLocation, isImperial);
+  }, []);
 
-  // getForecast({
-  //   cityName: "Stamford",
-  //   imperial: true
-  // })
+  const handleInputChange = (e) => setCurrentLocation(e.target.value);
+  const handleRadioChange = (e) => setIsImperial(e.target.value);
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    weatherLookup(currentLocation, isImperial)
+  }
 
   return (
     <div className="App">
@@ -34,7 +38,8 @@ function App() {
       <InputBar
         value={""}/>
       <CurrentWeather
-        weatherData= {weatherData} />
+        weatherData= {weatherData}
+        isImperial = {isImperial} />
     </div>
   );
 }

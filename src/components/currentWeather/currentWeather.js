@@ -9,7 +9,7 @@ export default function CurrentWeather(props) {
                 <h3>Stamford, CT</h3>
                 <hr/>
                 <p>image</p>
-                <p>Temperature</p>
+                <p>{props.weatherData.main.temp}°{props.isImperial?"F":"C"}</p>
                 <p>Wind Speed</p>
                 <p>Humidity</p>
             </div>
