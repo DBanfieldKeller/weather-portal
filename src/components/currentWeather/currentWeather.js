@@ -11,7 +11,7 @@ export default function CurrentWeather(props) {
                 <p>image</p>
                 <p>Temp: {Math.round(props.weatherData.main.temp)}°{props.isImperial?"F":"C"}</p>
                 <p>Wind Speed: {Math.round(props.weatherData.wind.speed)} {props.isImperial?"mph":"kph"}</p>
-                <p>Humidity</p>
+                <p>Humidity: {props.weatherData.main.humidity}%</p>
             </div>
         </div>
     )
