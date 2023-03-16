@@ -10,7 +10,7 @@ import InputBar from './components/inputBar/inputBar';
 function App() {
 
   const [currentLocation, setCurrentLocation] = useState("New York");
-  const [isImperial, setIsImperial] = useState(false);
+  const [isImperial, setIsImperial] = useState(true);
   const [weatherData, setWeatherData ] = useState({});
 
   const weatherLookup = (location, unitValue) =>
@@ -21,7 +21,7 @@ function App() {
     .then((res) => setWeatherData(res.data));
   
   useEffect(() => {
-    weatherLookup(currentLocation, isImperial);
+    weatherLookup("New York", true);
   }, []);
 
   const handleInputChange = (e) => setCurrentLocation(e.target.value);
@@ -39,7 +39,8 @@ function App() {
         handleFormSubmit={handleFormSubmit}
         handleInputChange={handleInputChange}
         handleRadioChange={handleRadioChange}
-        currentLocation={currentLocation}/>
+        currentLocation={currentLocation}
+        isImperial={isImperial}/>
       <CurrentWeather
         weatherData= {weatherData}
         isImperial = {isImperial} />
