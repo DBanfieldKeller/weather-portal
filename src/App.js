@@ -4,7 +4,7 @@ import Header from './components/header/header';
 import CurrentWeather from './components/currentWeather/currentWeather';
 import getForecast from './utils/weatherAPI';
 import InputBar from './components/inputBar/inputBar';
-import userEvent from '@testing-library/user-event';
+
 
 
 function App() {
@@ -36,7 +36,7 @@ function App() {
     <div className="App">
       <Header />
       <InputBar
-        value={""}/>
+        />
       <CurrentWeather
         weatherData= {weatherData}
         isImperial = {isImperial} />

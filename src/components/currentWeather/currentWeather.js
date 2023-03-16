@@ -9,9 +9,9 @@ export default function CurrentWeather(props) {
                 <h3>{props.weatherData.name}</h3>
                 <hr/>
                 <p>image</p>
-                <p>Temp: {Math.round(props.weatherData.main.temp)}°{props.isImperial?"F":"C"}</p>
-                <p>Wind Speed: {Math.round(props.weatherData.wind.speed)} {props.isImperial?"mph":"kph"}</p>
-                <p>Humidity: {props.weatherData.main.humidity}%</p>
+                <p>Temp: {Math.round(props.weatherData.main?.temp)}°{props.isImperial?"F":"C"}</p>
+                <p>Wind Speed: {Math.round(props.weatherData.wind?.speed)} {props.isImperial?"mph":"kph"??"Loading"}</p>
+                <p>Humidity: {props.weatherData.main?.humidity??"Loading"}%</p>
             </div>
         </div>
     )
