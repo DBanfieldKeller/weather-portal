@@ -5,7 +5,7 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import "./style.css";
 
-export default function InputBar() {
+export default function InputBar(props) {
     return (
         <Form>
         <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
@@ -13,7 +13,11 @@ export default function InputBar() {
             City Name
           </Form.Label>
           <Col sm={10}>
-            <Form.Control type="input" placeholder="City, State or City, Country" />
+            <Form.Control 
+            type="input" 
+            placeholder="City, State or City, Country" 
+            value={props.value}
+            onChange={props.handleInputChange} />
           </Col>
         </Form.Group>
           <Form.Group as={Row} className="mb-3">
