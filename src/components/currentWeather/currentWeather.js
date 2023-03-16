@@ -1,6 +1,8 @@
 import React from "react";
 import "./style.css";
 
+// TODO: Fix NaN rendering for split second
+
 export default function CurrentWeather(props) {
     return (
         <div>
