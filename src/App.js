@@ -10,26 +10,28 @@ import InputBar from './components/inputBar/inputBar';
 function App() {
 
   const [currentLocation, setCurrentLocation] = useState("New York");
-  const [isImperial, setIsImperial] = useState(true);
+  const [units, setUnits] = useState("imperial");
   const [weatherData, setWeatherData ] = useState({});
 
-  const weatherLookup = (location, unitValue) =>
-    getForecast({
-      cityName: location,
-      isImperial: unitValue
-    })
-    .then((res) => setWeatherData(res.data));
+  const weatherLookup = (currentLocation, units) => {
+    getForecast(currentLocation, units)
+    .then((res) => setWeatherData(res.data))
+    .catch((err)=>console.log(err));
+  }
   
   useEffect(() => {
-    weatherLookup("New York", true);
+    weatherLookup("New York", "imperial");
   }, []);
 
   const handleInputChange = (e) => setCurrentLocation(e.target.value);
-  const handleRadioChange = (e) => setIsImperial(e.target.value);
+  const handleUnitChange = (e) => {
+    setUnits(e.target.value)
+  };
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    weatherLookup(currentLocation, isImperial)
+    weatherLookup(currentLocation, units)
+    console.log(currentLocation, units)
   }
 
   return (
@@ -38,12 +40,12 @@ function App() {
       <InputBar
         handleFormSubmit={handleFormSubmit}
         handleInputChange={handleInputChange}
-        handleRadioChange={handleRadioChange}
+        handleUnitChange={handleUnitChange}
         currentLocation={currentLocation}
-        isImperial={isImperial}/>
+        units={units}/>
       <CurrentWeather
         weatherData= {weatherData}
-        isImperial = {isImperial} />
+        units = {units} />
     </div>
   );
 }

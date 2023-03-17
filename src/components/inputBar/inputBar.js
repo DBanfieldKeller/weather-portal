@@ -27,18 +27,20 @@ export default function InputBar(props) {
               <Form.Check
                 type="radio"
                 label="Imperial"
-                name="formHorizontalRadios"
+                name="unitSelect"
                 id="formHorizontalRadios1"
-                value={true}
-                checked={props.isImperial===true}
+                value= {"imperial"}
+                checked={props.units==="imperial"}
+                onChange={props.handleUnitChange}
               />
               <Form.Check
                 type="radio"
                 label="Metric"
-                name="formHorizontalRadios"
+                name="unitSelect"
                 id="formHorizontalRadios2"
-                value={false}
-                checked={props.isImperial===false}
+                value={"metric"}
+                checked={props.units==="metric"}
+                onChange={props.handleUnitChange}
               />
           </Form.Group>
           <Form.Group as={Row} className="mb-3">
