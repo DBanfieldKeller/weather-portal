@@ -3,7 +3,7 @@ import './App.css';
 import Header from './components/header/header';
 import CurrentWeather from './components/currentWeather/currentWeather';
 import InputBar from './components/inputBar/inputBar';
-import LoginForm from './components/login/login'; 
+import LoginModal from './components/loginModal/loginModal';
 import getForecast from './utils/weatherAPI';
 import formatOutput from './utils/formatOutput';
 
@@ -44,7 +44,7 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <LoginForm />
+      <LoginModal />
       <InputBar
         handleFormSubmit={handleFormSubmit}
         handleInputChange={handleInputChange}
