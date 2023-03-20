@@ -16,7 +16,7 @@ export default function InputBar(props) {
             <Form.Control 
             type="input" 
             placeholder="City, State or City, Country" 
-            value={props.value}
+            value={props.currentLocation}
             onChange={props.handleInputChange} />
           </Col>
         </Form.Group>
@@ -27,19 +27,28 @@ export default function InputBar(props) {
               <Form.Check
                 type="radio"
                 label="Imperial"
-                name="formHorizontalRadios"
+                name="unitSelect"
                 id="formHorizontalRadios1"
+                value= {"imperial"}
+                checked={props.units==="imperial"}
+                onChange={props.handleUnitChange}
               />
               <Form.Check
                 type="radio"
                 label="Metric"
-                name="formHorizontalRadios"
+                name="unitSelect"
                 id="formHorizontalRadios2"
+                value={"metric"}
+                checked={props.units==="metric"}
+                onChange={props.handleUnitChange}
               />
           </Form.Group>
           <Form.Group as={Row} className="mb-3">
         <Col sm={{ span: 10, offset: 2 }}>
-          <Button type="submit">Bleat Your Weather</Button>
+          <Button
+           type="submit"
+           onClick={props.handleFormSubmit}>
+            Bleat Your Weather</Button>
         </Col>
       </Form.Group>
       </Form>
