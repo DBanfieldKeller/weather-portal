@@ -2,6 +2,8 @@ export default function formatOutput(response, units) {
     const tempData = response.data.main.temp;
     const windData = response.data.wind.speed;
     const humidityData = response.data.main.humidity;
+    const iconCode = response.data.weather[0].icon;
+    const description = response.data.weather[0].description;
     
     
     let tempUnit
@@ -39,7 +41,10 @@ export default function formatOutput(response, units) {
         cityName: response.data.name||"loading",
         temp: temp,
         wind: wind,
-        humidity: humidity
-    }
+        humidity: humidity,
+        iconCode: iconCode||"",
+        description: description
+    };
+
     return ( formattedOutput)
 }
