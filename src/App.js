@@ -2,9 +2,9 @@ import React, {useState, useEffect} from 'react';
 import './App.css';
 import Header from './components/header/header';
 import CurrentWeather from './components/currentWeather/currentWeather';
-import getForecast from './utils/weatherAPI';
 import InputBar from './components/inputBar/inputBar';
-
+import getForecast from './utils/weatherAPI';
+import formatOutput from './utils/formatOutput';
 
 
 function App() {
@@ -13,10 +13,16 @@ function App() {
   const [units, setUnits] = useState("imperial");
   const [weatherData, setWeatherData ] = useState({});
 
+  const weatherFormat = (output, units) => {
+    const formattedOutput = formatOutput(output, units);
+    return (formattedOutput);
+  }
+
   const weatherLookup = (currentLocation, units) => {
     getForecast(currentLocation, units)
-    .then((res) => setWeatherData(res.data))
+    .then((res) =>setWeatherData(weatherFormat(res, units)))
     .catch((err)=>console.log(err));
+    console.log(weatherData)
   }
   
   useEffect(() => {

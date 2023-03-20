@@ -1,19 +1,19 @@
 import React from "react";
 import "./style.css";
 
-// TODO: Fix NaN rendering for split second
-
 export default function CurrentWeather(props) {
     return (
         <div>
             <div className="currentweather">
                 <h2>Current Weather</h2>
-                <h3>{props.weatherData?.name??"Loading"}</h3>
+                <h3>{props.weatherData.cityName}</h3>
                 <hr/>
-                <p>image</p>
-                <p>Temp: {Math.round(props.weatherData?.main?.temp)}°{props.units==="imperial"?"F":"C"}</p>
-                <p>Wind Speed: {Math.round(props.weatherData?.wind?.speed)} {props.units==="imperial"?"mph":"m/s"??"Loading"}</p>
-                <p>Humidity: {props.weatherData?.main?.humidity??"Loading"}%</p>
+                <div>
+                    {props.weatherData.iconCode&&<img src={"http://openweathermap.org/img/wn/"+props.weatherData.iconCode+"@2x.png"} alt={props.weatherData.description}/>}
+                </div>
+                <p>Temp:{props.weatherData.temp}</p>
+                <p>Wind Speed: {props.weatherData.wind}</p>
+                <p>Humidity: {props.weatherData.humidity}</p>
             </div>
         </div>
     )
