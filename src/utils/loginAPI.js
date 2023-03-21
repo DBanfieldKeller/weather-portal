@@ -16,19 +16,20 @@ export default async function login(userInfo) {
     }
 };
 
-export async function register(userInfo) {
-    try{
-        const response = await axios.post(`${URL}/register`, {
-            username: userInfo.username,
-            password: userInfo.password,
-            expiry: userInfo.expiry,
-        });
-        console.log("response: ", response)
-    }catch(error) {
-        console.log(error)
-        return [];
-    }
-};
+// export async function register(userInfo) {
+//     try{
+//         const response = await axios.post(`${URL}/register`, {
+//             name: userInfo.name,
+//             username: userInfo.username,
+//             password: userInfo.password,
+//             expiry: userInfo.expiry,
+//         });
+//         console.log("response: ", response)
+//     }catch(error) {
+//         console.log(error)
+//         return [];
+//     }
+// };
 
 export async function verify(userInfo) {
     try{

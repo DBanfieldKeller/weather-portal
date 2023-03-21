@@ -3,13 +3,19 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Login from "../login/login";
 import login from "../../utils/loginAPI";
+import register from "../../utils/registerAPI";
 
 export default function LoginModal() {
   const [show, setShow] = useState(false);
   const [loginInfo, setLoginInfo] = useState({});
+  const [authMode, setAuthMode] = useState("login");
+
+  const changeAuthMode = () => {
+    setAuthMode(authMode === "login" ? "register" : "login")
+  }
 
   const handleClose = () => setShow(false);
-  
+
   const handleShow = () => setShow(true);
 
   const handleUsernameInput = (e) => setLoginInfo(prevLoginInfo => {
@@ -24,6 +30,13 @@ export default function LoginModal() {
       ...prevLoginInfo,
       password: e.target.value
     }
+  });
+
+  const handleNameInput = (e) => setLoginInfo(prevLoginInfo=> {
+    return {
+      ...prevLoginInfo,
+      name: e.target.value
+    }
   })
 
   const handleLogin = (e) => {
@@ -34,6 +47,16 @@ export default function LoginModal() {
     })
   };
 
+  const handleRegister = (e) => {
+    e.preventDefault();
+    console.log(loginInfo)
+    register({
+      name: loginInfo.name,
+      username: loginInfo.username,
+      password: loginInfo.password
+    })
+  }
+
   return (
     <>
       <Button variant="primary" onClick={handleShow}>
@@ -42,22 +65,33 @@ export default function LoginModal() {
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Login to Goatnet</Modal.Title>
+          <Modal.Title>Goatnet</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Login
-          loginInfo={loginInfo}
-          handleUsernameInput={handleUsernameInput}
-          handlePasswordInput={handlePasswordInput}
-           />
+            loginInfo={loginInfo}
+            authMode={authMode}
+            changeAuthMode={changeAuthMode}
+            handleUsernameInput={handleUsernameInput}
+            handlePasswordInput={handlePasswordInput}
+            handleNameInput={handleNameInput}
+
+          />
         </Modal.Body>
         <Modal.Footer>
-        <Button
-          variant="primary"
-          type="submit"
-          onClick={handleLogin}>
-          Login
-        </Button>
+          {authMode === "login" ?
+            <Button
+              variant="primary"
+              type="submit"
+              onClick={handleLogin}>
+              Login
+            </Button> :
+            <Button
+              variant="primary"
+              type="submit"
+              onClick={handleRegister}>
+              Register
+            </Button>}
         </Modal.Footer>
       </Modal>
     </>
