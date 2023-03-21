@@ -12,12 +12,12 @@ export default function LoginModal() {
   return (
     <>
       <Button variant="primary" onClick={handleShow}>
-        Launch demo modal
+        Login to Goatnet
       </Button>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Login</Modal.Title>
+          <Modal.Title>Login to Goatnet</Modal.Title>
         </Modal.Header>
         <Modal.Body>
             <Login />
