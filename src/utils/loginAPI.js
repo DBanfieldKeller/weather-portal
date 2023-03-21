@@ -2,7 +2,7 @@ import axios from "axios";
 
 const URL = "https://ov0whl3p5b.execute-api.us-east-2.amazonaws.com/alpha"
 
-export async function login(userInfo) {
+export default async function login(userInfo) {
     try{
         const response = await axios.post(`${URL}/login`, {
             username: userInfo.username,

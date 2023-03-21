@@ -3,32 +3,10 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { login } from "../../utils/loginAPI";
 
-export default function Login() {
+export default function Login(props) {
 
   const [authMode, setAuthMode] = useState("login");
-  const [loginInfo, setLoginInfo] = useState({});
-
-  const handleUsernameInput = (e) => setLoginInfo(prevLoginInfo => {
-    return {
-      ...prevLoginInfo,
-      username: e.target.value
-    };
-  });
-
-  const handlePasswordInput = (e) => setLoginInfo(prevLoginInfo => {
-    return {
-      ...prevLoginInfo,
-      password: e.target.value
-    }
-  })
-
-  const handleLogin = (e) => {
-    e.preventDefault();
-    login({
-      username: loginInfo.username,
-      password: loginInfo.password
-    })
-  };
+  
 
   const changeAuthMode =() => {
     setAuthMode(authMode === "login"?"register":"login")
@@ -44,7 +22,7 @@ export default function Login() {
             type="text"
             placeholder="Username"
             name="username"
-            onChange={handleUsernameInput} />
+            onChange={props.handleUsernameInput} />
           <Form.Text className="text-muted">
             Are you sure it's wise to give your name to a goat?
           </Form.Text>
@@ -56,7 +34,7 @@ export default function Login() {
             type="password"
             placeholder="Password"
             name="pwd"
-            onChange={handlePasswordInput} />
+            onChange={props.handlePasswordInput} />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicCheckbox">
           <Form.Check inline="true" type="checkbox" label="Remember Me" />
@@ -64,12 +42,6 @@ export default function Login() {
         <div>Not registered yet? 
           <span id="link" onClick={changeAuthMode} >Sign Up</span>
         </div>
-        <Button
-          variant="primary"
-          type="submit"
-          onClick={handleLogin}>
-          Login
-        </Button>
       </Form>
     );
   };
@@ -83,7 +55,7 @@ export default function Login() {
         type="name"
         placeholder="Name"
         name="name"
-        onChange={handlePasswordInput} />
+        onChange={props.handlePasswordInput} />
     </Form.Group>
     <Form.Group className="mb-3" controlId="formBasicEmail">
       <Form.Label>Username</Form.Label>
@@ -91,7 +63,7 @@ export default function Login() {
         type="text"
         placeholder="Username"
         name="username"
-        onChange={handleUsernameInput} />
+        onChange={props.handleUsernameInput} />
       <Form.Text className="text-muted">
         Are you sure it's wise to give your name to a goat?
       </Form.Text>
@@ -103,7 +75,7 @@ export default function Login() {
         type="password"
         placeholder="Password"
         name="pwd"
-        onChange={handlePasswordInput} />
+        onChange={props.handlePasswordInput} />
     </Form.Group>
     <Form.Group className="mb-3" controlId="formBasicCheckbox">
       <Form.Check inline="true" type="checkbox" label="Remember Me" />
