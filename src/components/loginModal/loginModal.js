@@ -7,8 +7,13 @@ import register from "../../utils/registerAPI";
 
 export default function LoginModal() {
   const [show, setShow] = useState(false);
-  const [loginInfo, setLoginInfo] = useState({});
+  const [loginInfo, setLoginInfo] = useState({
+    name:"",
+    username: "",
+    password: ""
+  });
   const [authMode, setAuthMode] = useState("login");
+  const [errorMessage, setErrorMessage] = useState("")
 
   const changeAuthMode = () => {
     setAuthMode(authMode === "login" ? "register" : "login")
@@ -44,7 +49,10 @@ export default function LoginModal() {
     login({
       username: loginInfo.username,
       password: loginInfo.password
-    })
+    }).then((res) =>(console.log(res)))
+    .catch((err) => console.log(err)
+
+    )
   };
 
   const handleRegister = (e) => {
@@ -71,6 +79,7 @@ export default function LoginModal() {
           <Login
             loginInfo={loginInfo}
             authMode={authMode}
+            errorMessage={errorMessage}
             changeAuthMode={changeAuthMode}
             handleUsernameInput={handleUsernameInput}
             handlePasswordInput={handlePasswordInput}

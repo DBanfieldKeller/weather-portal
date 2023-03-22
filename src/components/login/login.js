@@ -14,6 +14,7 @@ export default function Login(props) {
             type="text"
             placeholder="Username"
             name="username"
+            value={props.loginInfo.username}
             onChange={props.handleUsernameInput} />
           <Form.Text className="text-muted">
             Are you sure it's wise to give your name to a goat?
@@ -25,6 +26,7 @@ export default function Login(props) {
             type="password"
             placeholder="Password"
             name="pwd"
+            value={props.loginInfo.password}
             onChange={props.handlePasswordInput} />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicCheckbox">
@@ -40,31 +42,34 @@ export default function Login(props) {
 // register screen
   return(
     <Form>
-       <Form.Group className="mb-3" controlId="formBasicName">
+       <Form.Group className="mb-4" controlId="formBasicName">
       <Form.Label>Name</Form.Label>
       <Form.Control
-        type="name"
+        type="text"
         placeholder="Name"
         name="name"
+        value={props.loginInfo.name}
         onChange={props.handleNameInput} />
     </Form.Group>
-    <Form.Group className="mb-3" controlId="formBasicEmail">
+    <Form.Group className="mb-4" controlId="formBasicEmail">
       <Form.Label>Username</Form.Label>
       <Form.Control
         type="text"
         placeholder="Username"
         name="username"
+        value={props.loginInfo.username}
         onChange={props.handleUsernameInput} />
       <Form.Text className="text-muted">
         Are you sure it's wise to give your name to a goat?
       </Form.Text>
     </Form.Group>
-    <Form.Group className="mb-3" controlId="formBasicPassword">
+    <Form.Group className="mb-4" controlId="formBasicPassword">
       <Form.Label>Password</Form.Label>
       <Form.Control
         type="password"
         placeholder="Password"
         name="pwd"
+        value={props.loginInfo.password}
         onChange={props.handlePasswordInput} />
     </Form.Group>
     <Form.Group className="mb-3" controlId="formBasicCheckbox">
