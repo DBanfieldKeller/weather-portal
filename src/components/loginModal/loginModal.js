@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Login from "../login/login";
@@ -62,8 +62,15 @@ export default function LoginModal() {
       name: loginInfo.name,
       username: loginInfo.username,
       password: loginInfo.password
+    }).then((res)=>{
+      res.isError?setErrorMessage(res.response):setErrorMessage("")
     })
-  }
+  };
+  
+  // prevents error message from carrying over between login and register screens
+  useEffect(()=>{
+    setErrorMessage("")
+  },[authMode])
 
   return (
     <>

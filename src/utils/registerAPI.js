@@ -12,8 +12,15 @@ export default async function register(userInfo) {
             expiry: userInfo.expiry,
         });
         console.log("response: ", response)
+        return {
+            isError: false,
+            response: response
+        }
     }catch(error) {
         console.log(error)
-        return [];
+        return {
+            isError: true,
+            response: error.response.data.message
+        };
     }
 };
