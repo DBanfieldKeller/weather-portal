@@ -14,6 +14,7 @@ export default function LoginModal() {
   });
   const [authMode, setAuthMode] = useState("login");
   const [errorMessage, setErrorMessage] = useState("")
+  const [welcomeMessage, setWelcomeMessage] = useState("")
 
   const changeAuthMode = () => {
     setAuthMode(authMode === "login" ? "register" : "login")
@@ -50,9 +51,10 @@ export default function LoginModal() {
       username: loginInfo.username,
       password: loginInfo.password
     }).then((res) =>{
-      console.log(typeof res.response)
-      console.log(res)
-      res.isError?setErrorMessage(res.response):setErrorMessage("")})
+      console.log(typeof res.response);
+      console.log(res);
+      res.isError?setErrorMessage(res.response):setErrorMessage("");
+      !res.isError?setWelcomeMessage(`Welcome baa'ck ${res.username}`):setWelcomeMessage("")})
   };
 
   const handleRegister = (e) => {
@@ -87,6 +89,7 @@ export default function LoginModal() {
             loginInfo={loginInfo}
             authMode={authMode}
             errorMessage={errorMessage}
+            welcomeMessage={welcomeMessage}
             changeAuthMode={changeAuthMode}
             handleUsernameInput={handleUsernameInput}
             handlePasswordInput={handlePasswordInput}

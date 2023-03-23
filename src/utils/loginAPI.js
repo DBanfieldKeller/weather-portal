@@ -12,7 +12,8 @@ export default async function login(userInfo) {
         console.log("response: ", response)
         return {
             isError:false, 
-            response: response
+            response: response.data.token,
+            username: response.data.login.username
         };
     }catch(error) {
         console.log(error)

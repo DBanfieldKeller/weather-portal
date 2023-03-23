@@ -32,8 +32,11 @@ export default function Login(props) {
         <Form.Group className="mb-3" controlId="formBasicCheckbox">
           <Form.Check inline="true" type="checkbox" label="Remember Me" />
         </Form.Group>
-        <div>
+        <div className="error-message">
           {props.errorMessage}
+        </div>
+        <div>
+          {props.welcomeMessage}
         </div>
         <br />
         <div>Not registered yet?{" "}
@@ -79,7 +82,7 @@ export default function Login(props) {
       <Form.Group className="mb-3" controlId="formBasicCheckbox">
         <Form.Check inline="true" type="checkbox" label="Remember Me" />
       </Form.Group>
-      <div>
+      <div className="error-message">
         {props.errorMessage}
       </div>
       <br />
