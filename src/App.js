@@ -19,6 +19,7 @@ function App() {
     return (formattedOutput);
   }
 
+  // TODO: Confirm if catch actually does anything
   const weatherLookup = (currentLocation, units) => {
     getForecast(currentLocation, units)
     .then((res) =>setWeatherData(weatherFormat(res, units)))

@@ -49,10 +49,10 @@ export default function LoginModal() {
     login({
       username: loginInfo.username,
       password: loginInfo.password
-    }).then((res) =>(console.log(res)))
-    .catch((err) => console.log(err)
-
-    )
+    }).then((res) =>{
+      console.log(typeof res.response)
+      console.log(res)
+      res.isError?setErrorMessage(res.response):setErrorMessage("")})
   };
 
   const handleRegister = (e) => {

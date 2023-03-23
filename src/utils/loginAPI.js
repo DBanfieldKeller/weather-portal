@@ -10,9 +10,17 @@ export default async function login(userInfo) {
             expiry: userInfo.expiry,
         });
         console.log("response: ", response)
+        return {
+            isError:false, 
+            response: response
+        };
     }catch(error) {
         console.log(error)
-        return [];
+        console.log(error.response.data.message)
+        return {
+            isError: true,
+            response: error.response.data.message
+        };
     }
 };
 

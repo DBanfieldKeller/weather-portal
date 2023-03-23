@@ -32,6 +32,10 @@ export default function Login(props) {
         <Form.Group className="mb-3" controlId="formBasicCheckbox">
           <Form.Check inline="true" type="checkbox" label="Remember Me" />
         </Form.Group>
+        <div>
+          {props.errorMessage}
+        </div>
+        <br/>
         <div>Not registered yet?{" "} 
           <span id="link" onClick={props.changeAuthMode} >Sign Up</span>
         </div>
