@@ -6,51 +6,47 @@ import Button from "react-bootstrap/Button";
 import "./style.css";
 
 export default function InputBar(props) {
-    return (
-        <Form>
-        <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
-          <Form.Label column sm={2}>
-            City Name
-          </Form.Label>
-          <Col sm={10}>
-            <Form.Control 
-            type="input" 
-            placeholder="City, State or City, Country" 
+  return (
+    <Form id="input-body">
+      <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
+        <p>City Name</p>
+        <Col sm={{ span: 2, offset: 5 }}>
+          <Form.Control
+            type="input"
+            placeholder="City Name"
             value={props.currentLocation}
             onChange={props.handleInputChange} />
-          </Col>
-        </Form.Group>
-          <Form.Group as={Row} className="mb-3">
-            <Form.Label as="legend" column sm={2}>
-              Units
-            </Form.Label>
-              <Form.Check
-                type="radio"
-                label="Imperial"
-                name="unitSelect"
-                id="formHorizontalRadios1"
-                value= {"imperial"}
-                checked={props.units==="imperial"}
-                onChange={props.handleUnitChange}
-              />
-              <Form.Check
-                type="radio"
-                label="Metric"
-                name="unitSelect"
-                id="formHorizontalRadios2"
-                value={"metric"}
-                checked={props.units==="metric"}
-                onChange={props.handleUnitChange}
-              />
-          </Form.Group>
-          <Form.Group as={Row} className="mb-3">
-        <Col sm={{ span: 10, offset: 2 }}>
+        </Col>
+      </Form.Group>
+      <p>Units</p>
+      <Form.Check
+        type="radio"
+        inline="true"
+        label="Imperial"
+        name="unitSelect"
+        id="formHorizontalRadios1"
+        value={"imperial"}
+        checked={props.units === "imperial"}
+        onChange={props.handleUnitChange}
+      />
+      <Form.Check
+        type="radio"
+        inline="true"
+        label="Metric"
+        name="unitSelect"
+        id="formHorizontalRadios2"
+        value={"metric"}
+        checked={props.units === "metric"}
+        onChange={props.handleUnitChange}
+      />
+      <Form.Group as={Row} className="mb-3">
+        <Col sm={{ span: 10, offset: 1 }} id="submit-button-container">
           <Button
-           type="submit"
-           onClick={props.handleFormSubmit}>
+            type="submit"
+            onClick={props.handleFormSubmit}>
             Bleat Your Weather</Button>
         </Col>
       </Form.Group>
-      </Form>
-    )
+    </Form>
+  )
 }

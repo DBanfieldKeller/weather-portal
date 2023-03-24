@@ -47,4 +47,4 @@ export default function formatOutput(response, units) {
     };
 
     return ( formattedOutput)
-}
+};

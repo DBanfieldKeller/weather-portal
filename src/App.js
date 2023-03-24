@@ -3,6 +3,7 @@ import './App.css';
 import Header from './components/header/header';
 import CurrentWeather from './components/currentWeather/currentWeather';
 import InputBar from './components/inputBar/inputBar';
+import LoginModal from './components/loginModal/loginModal';
 import getForecast from './utils/weatherAPI';
 import formatOutput from './utils/formatOutput';
 
@@ -18,6 +19,7 @@ function App() {
     return (formattedOutput);
   }
 
+  // TODO: Confirm if catch actually does anything
   const weatherLookup = (currentLocation, units) => {
     getForecast(currentLocation, units)
     .then((res) =>setWeatherData(weatherFormat(res, units)))
@@ -43,6 +45,7 @@ function App() {
   return (
     <div className="App">
       <Header />
+      <LoginModal />
       <InputBar
         handleFormSubmit={handleFormSubmit}
         handleInputChange={handleInputChange}

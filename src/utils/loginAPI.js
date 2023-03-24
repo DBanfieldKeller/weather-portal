@@ -2,7 +2,7 @@ import axios from "axios";
 
 const URL = "https://ov0whl3p5b.execute-api.us-east-2.amazonaws.com/alpha"
 
-export async function login(userInfo) {
+export default async function login(userInfo) {
     try{
         const response = await axios.post(`${URL}/login`, {
             username: userInfo.username,
@@ -10,23 +10,18 @@ export async function login(userInfo) {
             expiry: userInfo.expiry,
         });
         console.log("response: ", response)
+        return {
+            isError: false, 
+            token: response.data.token,
+            username: response.data.login.username
+        };
     }catch(error) {
         console.log(error)
-        return [];
-    }
-};
-
-export async function register(userInfo) {
-    try{
-        const response = await axios.post(`${URL}/register`, {
-            username: userInfo.username,
-            password: userInfo.password,
-            expiry: userInfo.expiry,
-        });
-        console.log("response: ", response)
-    }catch(error) {
-        console.log(error)
-        return [];
+        console.log(error.response.data.message)
+        return {
+            isError: true,
+            response: error.response.data.message
+        };
     }
 };
 
