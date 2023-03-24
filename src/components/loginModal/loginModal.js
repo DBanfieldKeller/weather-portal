@@ -16,12 +16,13 @@ export default function LoginModal() {
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setsuccessMessage] = useState("");
 
+  // toggle between login and register screens
   const changeAuthMode = () => {
-    setAuthMode(authMode === "login" ? "register" : "login")
-  }
+    setAuthMode(authMode === "login" ? "register" : "login");
+  };
 
+  // open and close modal
   const handleClose = () => setShow(false);
-
   const handleShow = () => setShow(true);
 
   const handleUsernameInput = (e) => setLoginInfo(prevLoginInfo => {
@@ -45,7 +46,7 @@ export default function LoginModal() {
     }
   })
 
-  // login function, sets welcome and error messages, sets token
+  // login function, sets welcome and error messages, sets token in session storage
   const handleLogin = (e) => {
     e.preventDefault();
     login({
