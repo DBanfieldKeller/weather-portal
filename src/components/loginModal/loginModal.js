@@ -59,11 +59,13 @@ export default function LoginModal() {
         setsuccessMessage("");
       } else {
         setErrorMessage("");
-        setsuccessMessage(`Welcome baa'ck ${res.username}`)
+        setsuccessMessage(`Welcome baa'ck ${res.username}!`);
+        window.sessionStorage.setItem("token", res.token);
       }
     })
   };
 
+  // register function, sets success and error messages
   const handleRegister = (e) => {
     e.preventDefault();
     console.log(loginInfo)
@@ -72,13 +74,12 @@ export default function LoginModal() {
       username: loginInfo.username,
       password: loginInfo.password
     }).then((res) => {
-      // res.isError ? setErrorMessage(res.response) : setErrorMessage("");
       if (res.isError) {
         setErrorMessage(res.response);
         setsuccessMessage("");
       } else {
         setErrorMessage("");
-        setsuccessMessage("Successfully registered!")
+        setsuccessMessage("Successfully registered!");
       }
     })
   };
