@@ -8,7 +8,7 @@ import register from "../../utils/registerAPI";
 export default function LoginModal() {
   const [show, setShow] = useState(false);
   const [loginInfo, setLoginInfo] = useState({
-    name:"",
+    name: "",
     username: "",
     password: ""
   });
@@ -38,7 +38,7 @@ export default function LoginModal() {
     }
   });
 
-  const handleNameInput = (e) => setLoginInfo(prevLoginInfo=> {
+  const handleNameInput = (e) => setLoginInfo(prevLoginInfo => {
     return {
       ...prevLoginInfo,
       name: e.target.value
@@ -50,11 +50,17 @@ export default function LoginModal() {
     login({
       username: loginInfo.username,
       password: loginInfo.password
-    }).then((res) =>{
+    }).then((res) => {
       console.log(typeof res.response);
       console.log(res);
-      res.isError?setErrorMessage(res.response):setErrorMessage("");
-      !res.isError?setWelcomeMessage(`Welcome baa'ck ${res.username}`):setWelcomeMessage("")})
+      if (res.isError) {
+        setErrorMessage(res.response);
+        setWelcomeMessage("");
+      } else {
+        setErrorMessage("");
+        setWelcomeMessage(`Welcome baa'ck ${res.username}`)
+      }
+    })
   };
 
   const handleRegister = (e) => {
@@ -64,15 +70,15 @@ export default function LoginModal() {
       name: loginInfo.name,
       username: loginInfo.username,
       password: loginInfo.password
-    }).then((res)=>{
-      res.isError?setErrorMessage(res.response):setErrorMessage("")
+    }).then((res) => {
+      res.isError ? setErrorMessage(res.response) : setErrorMessage("")
     })
   };
-  
+
   // prevents error message from carrying over between login and register screens
-  useEffect(()=>{
+  useEffect(() => {
     setErrorMessage("")
-  },[authMode])
+  }, [authMode])
 
   return (
     <>
