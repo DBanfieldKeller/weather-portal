@@ -11,7 +11,7 @@ export default async function login(userInfo) {
         });
         console.log("response: ", response)
         return {
-            isError:false, 
+            isError: false, 
             response: response.data.token,
             username: response.data.login.username
         };

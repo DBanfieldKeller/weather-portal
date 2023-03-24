@@ -13,8 +13,8 @@ export default function LoginModal() {
     password: ""
   });
   const [authMode, setAuthMode] = useState("login");
-  const [errorMessage, setErrorMessage] = useState("")
-  const [welcomeMessage, setWelcomeMessage] = useState("")
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setsuccessMessage] = useState("");
 
   const changeAuthMode = () => {
     setAuthMode(authMode === "login" ? "register" : "login")
@@ -45,6 +45,7 @@ export default function LoginModal() {
     }
   })
 
+  // login function, sets welcome and error messages, sets token
   const handleLogin = (e) => {
     e.preventDefault();
     login({
@@ -55,10 +56,10 @@ export default function LoginModal() {
       console.log(res);
       if (res.isError) {
         setErrorMessage(res.response);
-        setWelcomeMessage("");
+        setsuccessMessage("");
       } else {
         setErrorMessage("");
-        setWelcomeMessage(`Welcome baa'ck ${res.username}`)
+        setsuccessMessage(`Welcome baa'ck ${res.username}`)
       }
     })
   };
@@ -71,13 +72,21 @@ export default function LoginModal() {
       username: loginInfo.username,
       password: loginInfo.password
     }).then((res) => {
-      res.isError ? setErrorMessage(res.response) : setErrorMessage("")
+      // res.isError ? setErrorMessage(res.response) : setErrorMessage("");
+      if (res.isError) {
+        setErrorMessage(res.response);
+        setsuccessMessage("");
+      } else {
+        setErrorMessage("");
+        setsuccessMessage("Successfully registered!")
+      }
     })
   };
 
-  // prevents error message from carrying over between login and register screens
+  // prevents error and success message from carrying over between login and register screens
   useEffect(() => {
-    setErrorMessage("")
+    setErrorMessage("");
+    setsuccessMessage("");
   }, [authMode])
 
   return (
@@ -95,7 +104,7 @@ export default function LoginModal() {
             loginInfo={loginInfo}
             authMode={authMode}
             errorMessage={errorMessage}
-            welcomeMessage={welcomeMessage}
+            successMessage={successMessage}
             changeAuthMode={changeAuthMode}
             handleUsernameInput={handleUsernameInput}
             handlePasswordInput={handlePasswordInput}

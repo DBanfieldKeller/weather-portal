@@ -36,7 +36,7 @@ export default function Login(props) {
           {props.errorMessage}
         </div>
         <div>
-          {props.welcomeMessage}
+          {props.successMessage}
         </div>
         <br />
         <div>Not registered yet?{" "}
@@ -84,6 +84,9 @@ export default function Login(props) {
       </Form.Group>
       <div className="error-message">
         {props.errorMessage}
+      </div>
+      <div>
+        {props.successMessage}
       </div>
       <br />
       <div>Already registered?{" "}
