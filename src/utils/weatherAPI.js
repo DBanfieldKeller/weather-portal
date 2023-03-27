@@ -1,5 +1,7 @@
 import axios from "axios";
 
+// TODO: Set up dotenv for apiKey
+
 const URL = "https://api.openweathermap.org/data/2.5/weather?q="
 const apiKey = "b442f7cbd3dba47d0df28083d882bce6"
 
