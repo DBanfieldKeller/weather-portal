@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Login from "../login/login";
+import SearchHistory from "../searchHistory/searchHistory";
 import login from "../../utils/loginAPI";
 import register from "../../utils/registerAPI";
 
@@ -14,7 +15,8 @@ export default function LoginModal() {
   });
   const [authMode, setAuthMode] = useState("login");
   const [errorMessage, setErrorMessage] = useState("");
-  const [successMessage, setsuccessMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   // toggle between login and register screens
   const changeAuthMode = () => {
@@ -57,10 +59,10 @@ export default function LoginModal() {
       console.log(res);
       if (res.isError) {
         setErrorMessage(res.response);
-        setsuccessMessage("");
+        setSuccessMessage("");
       } else {
         setErrorMessage("");
-        setsuccessMessage(`Welcome baa'ck ${res.username}!`);
+        setSuccessMessage(`Welcome baa'ck ${res.username}!`);
         window.sessionStorage.setItem("token", res.token);
       }
     })
@@ -77,10 +79,10 @@ export default function LoginModal() {
     }).then((res) => {
       if (res.isError) {
         setErrorMessage(res.response);
-        setsuccessMessage("");
+        setSuccessMessage("");
       } else {
         setErrorMessage("");
-        setsuccessMessage("Successfully registered!");
+        setSuccessMessage("Successfully registered!");
       }
     })
   };
@@ -88,7 +90,7 @@ export default function LoginModal() {
   // prevents error and success message from carrying over between login and register screens
   useEffect(() => {
     setErrorMessage("");
-    setsuccessMessage("");
+    setSuccessMessage("");
   }, [authMode])
 
   return (
@@ -96,6 +98,8 @@ export default function LoginModal() {
       <Button variant="primary" onClick={handleShow}>
         Login to Goatnet
       </Button>
+      
+      <SearchHistory />
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>

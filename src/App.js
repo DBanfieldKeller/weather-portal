@@ -4,7 +4,6 @@ import Header from './components/header/header';
 import CurrentWeather from './components/currentWeather/currentWeather';
 import InputBar from './components/inputBar/inputBar';
 import LoginModal from './components/loginModal/loginModal';
-import SearchHistory from './components/searchHistory/searchHistory';
 import getForecast from './utils/weatherAPI';
 import formatOutput from './utils/formatOutput';
 
@@ -14,8 +13,6 @@ function App() {
   const [currentLocation, setCurrentLocation] = useState("New York");
   const [units, setUnits] = useState("imperial");
   const [weatherData, setWeatherData ] = useState({});
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [token, setToken] = useState("")
 
   const weatherFormat = (output, units) => {
     const formattedOutput = formatOutput(output, units);
@@ -57,9 +54,6 @@ function App() {
         handleUnitChange={handleUnitChange}
         currentLocation={currentLocation}
         units={units}/>
-      <SearchHistory 
-        isLoggedIn={isLoggedIn}
-      />
       <CurrentWeather
         weatherData= {weatherData}
         units = {units} />
