@@ -24,15 +24,3 @@ export default async function login(userInfo) {
         };
     }
 };
-
-export async function verify(userInfo) {
-    try{
-        const response = await axios.get(`${URL}/verifytoken`, {
-            token: userInfo.header.token,
-        });
-        console.log("response: ", response)
-    }catch(error) {
-        console.log(error)
-        return [];
-    }
-}

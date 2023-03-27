@@ -5,6 +5,7 @@ import Login from "../login/login";
 import SearchHistory from "../searchHistory/searchHistory";
 import login from "../../utils/loginAPI";
 import register from "../../utils/registerAPI";
+import verify from "../../utils/verifyAPI";
 
 export default function LoginModal() {
   const [show, setShow] = useState(false);
@@ -87,11 +88,23 @@ export default function LoginModal() {
     })
   };
 
+const verifyToken = () => {
+  const token = window.sessionStorage.getItem("token");
+  console.log(token);
+  verify(token)
+    .then((res) => {
+      console.log(res)
+    })
+
+}
+
   // prevents error and success message from carrying over between login and register screens
   useEffect(() => {
     setErrorMessage("");
     setSuccessMessage("");
-  }, [authMode])
+  }, [authMode]);
+
+  useEffect(()=> verifyToken(), [])
 
   return (
     <>

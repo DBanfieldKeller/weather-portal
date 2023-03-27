@@ -24,7 +24,6 @@ function App() {
     getForecast(currentLocation, units)
     .then((res) =>setWeatherData(weatherFormat(res, units)))
     .catch((err)=>console.log(err));
-    console.log(weatherData)
   }
   
   useEffect(() => {
