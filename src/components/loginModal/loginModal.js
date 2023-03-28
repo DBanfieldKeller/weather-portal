@@ -64,6 +64,7 @@ export default function LoginModal() {
       } else {
         setErrorMessage("");
         setSuccessMessage(`Welcome baa'ck ${res.username}!`);
+        setIsLoggedIn(true);
         window.sessionStorage.setItem("token", res.token);
       }
     })
@@ -88,17 +89,17 @@ export default function LoginModal() {
     })
   };
 
-const verifyToken = () => {
-  const token = window.sessionStorage.getItem("token");
-  console.log(token);
-  verify(token)
-    .then((res) => {
-      console.log(res);
-      res.data.verified?setIsLoggedIn(true):setIsLoggedIn(false);
-      console.log(isLoggedIn)
-    })
+  const verifyToken = () => {
+    const token = window.sessionStorage.getItem("token");
+    console.log(token);
+    verify(token)
+      .then((res) => {
+        console.log(res);
+        res.data?.verified ? setIsLoggedIn(true) : setIsLoggedIn(false);
+        console.log(isLoggedIn)
+      })
 
-}
+  }
 
   // prevents error and success message from carrying over between login and register screens
   useEffect(() => {
@@ -106,15 +107,19 @@ const verifyToken = () => {
     setSuccessMessage("");
   }, [authMode]);
 
-  useEffect(()=> verifyToken(), [])
+  useEffect(() => verifyToken(), [])
 
   return (
     <>
       <Button variant="primary" onClick={handleShow}>
         Login to Goatnet
       </Button>
-      
-      <SearchHistory />
+
+      <div>
+        {isLoggedIn === true ?
+          <SearchHistory /> :
+          ""}
+      </div>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
