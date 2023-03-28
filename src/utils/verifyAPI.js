@@ -10,7 +10,8 @@ export default async function verify(token) {
     }
     try{
         const response = await axios.get(`${URL}/verifytoken`, config);
-        console.log("response: ", response)
+        console.log("response: ", response);
+        return response
     }catch(error) {
         console.log(error)
         return [];

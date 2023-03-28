@@ -93,7 +93,9 @@ const verifyToken = () => {
   console.log(token);
   verify(token)
     .then((res) => {
-      console.log(res)
+      console.log(res);
+      res.data.verified?setIsLoggedIn(true):setIsLoggedIn(false);
+      console.log(isLoggedIn)
     })
 
 }
