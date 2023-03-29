@@ -89,6 +89,7 @@ export default function LoginModal() {
     })
   };
 
+  // verify token function
   const verifyToken = () => {
     const token = window.sessionStorage.getItem("token");
     console.log(token);
@@ -99,7 +100,13 @@ export default function LoginModal() {
         console.log(isLoggedIn)
       })
 
-  }
+  };
+
+  // logout function
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    window.sessionStorage.removeItem("token")
+  };
 
   // prevents error and success message from carrying over between login and register screens
   useEffect(() => {
@@ -107,18 +114,28 @@ export default function LoginModal() {
     setSuccessMessage("");
   }, [authMode]);
 
+  // check for and verify token on page load
   useEffect(() => verifyToken(), [])
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
-        Login to Goatnet
-      </Button>
+      <div>
+        {isLoggedIn ?
+          <Button
+            variant="outline-danger"
+            onClick={handleLogout}>
+            Logout
+          </Button>:
+            <Button
+            variant="primary"
+            onClick={handleShow}>
+            Login to Goatnet
+          </Button>}
+      </div>
 
       <div>
         {isLoggedIn === true ?
-          <SearchHistory /> :
-          ""}
+          <SearchHistory /> : ""}
       </div>
 
       <Modal show={show} onHide={handleClose}>
