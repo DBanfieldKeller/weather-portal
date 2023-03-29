@@ -105,7 +105,7 @@ export default function LoginModal() {
   // logout function
   const handleLogout = () => {
     setIsLoggedIn(false);
-    window.sessionStorage.removeItem("token")
+    window.sessionStorage.removeItem("token");
   };
 
   // prevents error and success message from carrying over between login and register screens
