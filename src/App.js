@@ -24,7 +24,6 @@ function App() {
     getForecast(currentLocation, units)
     .then((res) =>setWeatherData(weatherFormat(res, units)))
     .catch((err)=>console.log(err));
-    console.log(weatherData)
   }
   
   useEffect(() => {
@@ -40,7 +39,9 @@ function App() {
     e.preventDefault();
     weatherLookup(currentLocation, units)
     console.log(currentLocation, units)
-  }
+  };
+
+
 
   return (
     <div className="App">

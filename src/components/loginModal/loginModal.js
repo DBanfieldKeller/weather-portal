@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Login from "../login/login";
+import SearchHistory from "../searchHistory/searchHistory";
 import login from "../../utils/loginAPI";
 import register from "../../utils/registerAPI";
+import verify from "../../utils/verifyAPI";
 
 export default function LoginModal() {
   const [show, setShow] = useState(false);
@@ -14,7 +16,8 @@ export default function LoginModal() {
   });
   const [authMode, setAuthMode] = useState("login");
   const [errorMessage, setErrorMessage] = useState("");
-  const [successMessage, setsuccessMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   // toggle between login and register screens
   const changeAuthMode = () => {
@@ -57,10 +60,11 @@ export default function LoginModal() {
       console.log(res);
       if (res.isError) {
         setErrorMessage(res.response);
-        setsuccessMessage("");
+        setSuccessMessage("");
       } else {
         setErrorMessage("");
-        setsuccessMessage(`Welcome baa'ck ${res.username}!`);
+        setSuccessMessage(`Welcome baa'ck ${res.username}!`);
+        setIsLoggedIn(true);
         window.sessionStorage.setItem("token", res.token);
       }
     })
@@ -77,25 +81,57 @@ export default function LoginModal() {
     }).then((res) => {
       if (res.isError) {
         setErrorMessage(res.response);
-        setsuccessMessage("");
+        setSuccessMessage("");
       } else {
         setErrorMessage("");
-        setsuccessMessage("Successfully registered!");
+        setSuccessMessage("Successfully registered!");
       }
     })
+  };
+
+  // verify token function
+  const verifyToken = () => {
+    const token = window.sessionStorage.getItem("token");
+    console.log(token);
+    verify(token)
+      .then((res) => {
+        console.log(res);
+        res.data?.verified ? setIsLoggedIn(true) : setIsLoggedIn(false);
+        console.log(isLoggedIn)
+      })
+
+  };
+
+  // logout function
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    window.sessionStorage.removeItem("token");
   };
 
   // prevents error and success message from carrying over between login and register screens
   useEffect(() => {
     setErrorMessage("");
-    setsuccessMessage("");
-  }, [authMode])
+    setSuccessMessage("");
+  }, [authMode]);
+
+  // check for and verify token on page load
+  useEffect(() => verifyToken(), [])
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
-        Login to Goatnet
-      </Button>
+      <div>
+        {isLoggedIn ?
+          <Button
+            variant="outline-danger"
+            onClick={handleLogout}>
+            Logout
+          </Button>:
+            <Button
+            variant="primary"
+            onClick={handleShow}>
+            Login to Goatnet
+          </Button>}
+      </div>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>

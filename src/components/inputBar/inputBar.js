@@ -4,6 +4,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import "./style.css";
+import SearchHistory from "../searchHistory/searchHistory";
 
 export default function InputBar(props) {
   return (
@@ -45,6 +46,7 @@ export default function InputBar(props) {
             type="submit"
             onClick={props.handleFormSubmit}>
             Bleat Your Weather</Button>
+          <SearchHistory />
         </Col>
       </Form.Group>
     </Form>
