@@ -133,11 +133,6 @@ export default function LoginModal() {
           </Button>}
       </div>
 
-      <div>
-        {isLoggedIn === true ?
-          <SearchHistory /> : ""}
-      </div>
-
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Goatnet</Modal.Title>
