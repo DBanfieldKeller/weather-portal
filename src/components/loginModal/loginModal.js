@@ -7,7 +7,7 @@ import login from "../../utils/loginAPI";
 import register from "../../utils/registerAPI";
 import verify from "../../utils/verifyAPI";
 
-export default function LoginModal() {
+export default function LoginModal(props) {
   const [show, setShow] = useState(false);
   const [loginInfo, setLoginInfo] = useState({
     name: "",
