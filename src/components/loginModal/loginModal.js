@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Login from "../login/login";
-import SearchHistory from "../searchHistory/searchHistory";
 import login from "../../utils/loginAPI";
 import register from "../../utils/registerAPI";
 import verify from "../../utils/verifyAPI";
