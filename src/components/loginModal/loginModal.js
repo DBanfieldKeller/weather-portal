@@ -6,7 +6,7 @@ import login from "../../utils/loginAPI";
 import register from "../../utils/registerAPI";
 import verify from "../../utils/verifyAPI";
 
-export default function LoginModal() {
+export default function LoginModal(props) {
   const [show, setShow] = useState(false);
   const [loginInfo, setLoginInfo] = useState({
     name: "",
@@ -16,7 +16,6 @@ export default function LoginModal() {
   const [authMode, setAuthMode] = useState("login");
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   // toggle between login and register screens
   const changeAuthMode = () => {
@@ -63,7 +62,7 @@ export default function LoginModal() {
       } else {
         setErrorMessage("");
         setSuccessMessage(`Welcome baa'ck ${res.username}!`);
-        setIsLoggedIn(true);
+        props.handleLoggedInState(true);
         window.sessionStorage.setItem("token", res.token);
       }
     })
@@ -95,15 +94,15 @@ export default function LoginModal() {
     verify(token)
       .then((res) => {
         console.log(res);
-        res.data?.verified ? setIsLoggedIn(true) : setIsLoggedIn(false);
-        console.log(isLoggedIn)
+        res.data?.verified ? props.handleLoggedInState(true) : props.handleLoggedInState(false);
+        console.log(props.isLoggedIn)
       })
 
   };
 
   // logout function
   const handleLogout = () => {
-    setIsLoggedIn(false);
+    props.handleLoggedInState(false);
     window.sessionStorage.removeItem("token");
   };
 
@@ -119,7 +118,7 @@ export default function LoginModal() {
   return (
     <>
       <div>
-        {isLoggedIn ?
+        {props.isLoggedIn ?
           <Button
             variant="outline-danger"
             onClick={handleLogout}>

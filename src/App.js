@@ -13,6 +13,8 @@ function App() {
   const [currentLocation, setCurrentLocation] = useState("New York");
   const [units, setUnits] = useState("imperial");
   const [weatherData, setWeatherData ] = useState({});
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [searchHistory, setSearchHistory] = useState([]);
 
   const weatherFormat = (output, units) => {
     const formattedOutput = formatOutput(output, units);
@@ -30,6 +32,10 @@ function App() {
     weatherLookup("New York", "imperial");
   }, []);
 
+  useEffect(()=> {
+    console.log(isLoggedIn)
+  },[isLoggedIn]);
+
   const handleInputChange = (e) => setCurrentLocation(e.target.value);
   const handleUnitChange = (e) => {
     setUnits(e.target.value)
@@ -41,12 +47,14 @@ function App() {
     console.log(currentLocation, units)
   };
 
-
+  const handleLoggedInState = (boolean) => setIsLoggedIn(boolean)
 
   return (
     <div className="App">
       <Header />
-      <LoginModal />
+      <LoginModal 
+      handleLoggedInState={handleLoggedInState}
+      isLoggedIn={isLoggedIn}/>
       <InputBar
         handleFormSubmit={handleFormSubmit}
         handleInputChange={handleInputChange}
