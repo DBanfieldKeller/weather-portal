@@ -6,6 +6,7 @@ import InputBar from './components/inputBar/inputBar';
 import LoginModal from './components/loginModal/loginModal';
 import getForecast from './utils/weatherAPI';
 import formatOutput from './utils/formatOutput';
+import getHistory from './utils/historyAPI';
 
 
 function App() {
@@ -45,9 +46,24 @@ function App() {
     e.preventDefault();
     weatherLookup(currentLocation, units)
     console.log(currentLocation, units)
+    // TODO: add callback function to write history based on last search
   };
 
-  const handleLoggedInState = (boolean) => setIsLoggedIn(boolean)
+  const handleLoggedInState = (boolean) => setIsLoggedIn(boolean);
+
+  const retrieveHistory = () => {
+    const token = window.sessionStorage.getItem("token");
+    console.log(token);
+    getHistory(token)
+      .then((res) => {
+        console.log(res)
+      })
+
+  };
+
+  useEffect(()=> {
+    if (isLoggedIn) retrieveHistory()
+  },[isLoggedIn])
 
   return (
     <div className="App">

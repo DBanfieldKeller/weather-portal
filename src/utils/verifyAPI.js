@@ -14,6 +14,6 @@ export default async function verify(token) {
         return response
     }catch(error) {
         console.log(error)
-        return [error];
+        return error;
     }
 }
