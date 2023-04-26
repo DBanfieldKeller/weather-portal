@@ -60,7 +60,8 @@ function App() {
         handleInputChange={handleInputChange}
         handleUnitChange={handleUnitChange}
         currentLocation={currentLocation}
-        units={units}/>
+        units={units}
+        isLoggedIn={isLoggedIn}/>
       <CurrentWeather
         weatherData= {weatherData}
         units = {units} />
