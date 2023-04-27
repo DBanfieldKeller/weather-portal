@@ -6,7 +6,7 @@ import InputBar from './components/inputBar/inputBar';
 import LoginModal from './components/loginModal/loginModal';
 import getForecast from './utils/weatherAPI';
 import formatOutput from './utils/formatOutput';
-import getHistory from './utils/historyAPI';
+import {getHistory, updateHistory} from './utils/historyAPI';
 
 
 function App() {
@@ -42,7 +42,15 @@ function App() {
     setUnits(e.target.value)
   };
 
+  const writeSearchHistory = (searchHistory, currentLocation) => {
+    const searchHistoryArray = searchHistory
+    searchHistoryArray.unshift(currentLocation);
+    searchHistoryArray.splice(5);
+    setSearchHistory(searchHistoryArray)
+  }
+
   const handleFormSubmit = (e) => {
+    const token = window.sessionStorage.getItem("token");
     e.preventDefault();
     weatherLookup(currentLocation, units)
     console.log(currentLocation, units)
