@@ -34,12 +34,11 @@ function App() {
   }, []);
 
   useEffect(()=> {
-    console.log(isLoggedIn)
+    if(!isLoggedIn) setSearchHistory([])
   },[isLoggedIn]);
 
   useEffect(()=> {
     console.log(searchHistory)
-    console.log(typeof searchHistory)
   },[searchHistory])
 
   const handleInputChange = (e) => setCurrentLocation(e.target.value);
@@ -72,7 +71,9 @@ function App() {
     console.log(token);
     getHistory(token)
       .then((res) => {
-        setSearchHistory(res.data.userData.dataValue);
+        if(res.data.userData.dataValue) {
+          setSearchHistory(res.data.userData.dataValue);
+        }
       })
 
   };
