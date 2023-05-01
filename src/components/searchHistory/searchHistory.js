@@ -22,21 +22,11 @@ export default function SearchHistory(props) {
                 </Modal.Header>
                 <Modal.Body>
                     <ListGroup>
-                        <ListGroup.Item action>
-                            This one is a button
-                        </ListGroup.Item>
-                        <ListGroup.Item action>
-                            This one is a button
-                        </ListGroup.Item>
-                        <ListGroup.Item action>
-                            This one is a button
-                        </ListGroup.Item>
-                        <ListGroup.Item action>
-                            This one is a button
-                        </ListGroup.Item>
-                        <ListGroup.Item action>
-                            This one is a button
-                        </ListGroup.Item>
+                        {props.searchHistory.map(city =>
+                            <ListGroup.Item action>
+                                {city}
+                            </ListGroup.Item>
+                        )}
                     </ListGroup>
                 </Modal.Body>
                 <Modal.Footer>

@@ -46,7 +46,9 @@ export default function InputBar(props) {
             type="submit"
             onClick={props.handleFormSubmit}>
             Bleat Your Weather</Button>
-          {props.isLoggedIn ? <SearchHistory />: ""}
+          {props.isLoggedIn ? 
+          <SearchHistory 
+          searchHistory={props.searchHistory} /> : ""}
         </Col>
       </Form.Group>
     </Form>

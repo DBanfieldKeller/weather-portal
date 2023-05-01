@@ -34,7 +34,7 @@ function App() {
   }, []);
 
   useEffect(()=> {
-    if(!isLoggedIn) setSearchHistory([])
+    if(!isLoggedIn) setSearchHistory([]);
   },[isLoggedIn]);
 
   useEffect(()=> {
@@ -94,7 +94,8 @@ function App() {
         handleUnitChange={handleUnitChange}
         currentLocation={currentLocation}
         units={units}
-        isLoggedIn={isLoggedIn}/>
+        isLoggedIn={isLoggedIn}
+        searchHistory={searchHistory}/>
       <CurrentWeather
         weatherData= {weatherData}
         units = {units} />
