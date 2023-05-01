@@ -37,6 +37,11 @@ function App() {
     console.log(isLoggedIn)
   },[isLoggedIn]);
 
+  useEffect(()=> {
+    console.log(searchHistory)
+    console.log(typeof searchHistory)
+  },[searchHistory])
+
   const handleInputChange = (e) => setCurrentLocation(e.target.value);
   const handleUnitChange = (e) => {
     setUnits(e.target.value)
@@ -46,15 +51,18 @@ function App() {
     const searchHistoryArray = searchHistory
     searchHistoryArray.unshift(currentLocation);
     searchHistoryArray.splice(5);
-    setSearchHistory(searchHistoryArray)
-  }
+    setSearchHistory(searchHistoryArray);
+  };
+
+
 
   const handleFormSubmit = (e) => {
     const token = window.sessionStorage.getItem("token");
     e.preventDefault();
     weatherLookup(currentLocation, units)
     console.log(currentLocation, units)
-    // TODO: add callback function to write history based on last search
+    writeSearchHistory(searchHistory,currentLocation);
+    updateHistory(token, searchHistory);
   };
 
   const handleLoggedInState = (boolean) => setIsLoggedIn(boolean);
@@ -64,7 +72,7 @@ function App() {
     console.log(token);
     getHistory(token)
       .then((res) => {
-        console.log(res)
+        setSearchHistory(res.data.userData.dataValue);
       })
 
   };

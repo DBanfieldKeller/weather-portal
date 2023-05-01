@@ -25,8 +25,9 @@ export async function updateHistory(token, searchHistory) {
             token: token
         }
     };
+    const newData = {newData: searchHistory};
     try{
-        const response = await axios.put(`${URL}`, searchHistory, config)
+        const response = await axios.put(`${URL}`, newData, config)
         console.log("history response: ", response)
         return response
     }catch(error){
