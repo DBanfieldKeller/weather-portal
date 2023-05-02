@@ -35,6 +35,7 @@ function App() {
 
   useEffect(()=> {
     if(!isLoggedIn) setSearchHistory([]);
+    console.log(searchHistory)
   },[isLoggedIn]);
 
   useEffect(()=> {
@@ -59,7 +60,6 @@ function App() {
     const token = window.sessionStorage.getItem("token");
     e.preventDefault();
     weatherLookup(currentLocation, units)
-    console.log(currentLocation, units)
     writeSearchHistory(searchHistory,currentLocation);
     updateHistory(token, searchHistory);
   };
@@ -68,9 +68,9 @@ function App() {
 
   const retrieveHistory = () => {
     const token = window.sessionStorage.getItem("token");
-    console.log(token);
     getHistory(token)
       .then((res) => {
+        console.log(res);
         if(res.data.userData.dataValue) {
           setSearchHistory(res.data.userData.dataValue);
         }
