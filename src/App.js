@@ -14,7 +14,7 @@ function App() {
   const [currentLocation, setCurrentLocation] = useState("New York");
   const [units, setUnits] = useState("imperial");
   const [weatherData, setWeatherData] = useState({});
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState();
   const [searchHistory, setSearchHistory] = useState([]);
 
   const weatherFormat = (output, units) => {
@@ -43,26 +43,26 @@ function App() {
   }, [searchHistory])
 
   const handleInputChange = (e) => setCurrentLocation(e.target.value);
-  
+
   const handleUnitChange = (e) => {
     setUnits(e.target.value)
   };
 
   const writeSearchHistory = (searchHistory, currentLocation) => {
+    const token = window.sessionStorage.getItem("token")
     const searchHistoryArray = searchHistory
     searchHistoryArray.unshift(currentLocation);
     searchHistoryArray.splice(5);
     setSearchHistory(searchHistoryArray);
+    updateHistory(token, searchHistory)
   };
 
 
 
   const handleFormSubmit = (e) => {
-    const token = window.sessionStorage.getItem("token");
     e.preventDefault();
     weatherLookup(currentLocation, units);
     writeSearchHistory(searchHistory, currentLocation);
-    updateHistory(token, searchHistory);
   };
 
   const handleLoggedInState = (boolean) => setIsLoggedIn(boolean);
@@ -82,10 +82,6 @@ function App() {
   useEffect(() => {
     if (isLoggedIn) retrieveHistory()
   }, [isLoggedIn]);
-
-  // useEffect(() => {
-  //   console.log(currentLocation)
-  // }, [currentLocation])
 
   return (
     <div className="App">

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import ListGroup from "react-bootstrap/ListGroup";
@@ -13,7 +13,7 @@ export default function SearchHistory(props) {
         e.preventDefault()
         props.handleInputChange(e);
         props.weatherLookup(e.target.value, props.units);
-        handleClose()
+        handleClose();
     }
 
     return (
