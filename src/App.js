@@ -4,6 +4,7 @@ import Header from './components/header/header';
 import CurrentWeather from './components/currentWeather/currentWeather';
 import InputBar from './components/inputBar/inputBar';
 import LoginModal from './components/loginModal/loginModal';
+import LogoutAlert from './components/logoutAlert/logoutAlert';
 import getForecast from './utils/weatherAPI';
 import formatOutput from './utils/formatOutput';
 import { getHistory, updateHistory } from './utils/historyAPI';
@@ -75,6 +76,8 @@ function App() {
         if (res.data.userData.dataValue) {
           setSearchHistory(res.data.userData.dataValue);
         }
+      }).catch((err)=> {
+        console.log(err)
       })
 
   };
@@ -86,6 +89,7 @@ function App() {
   return (
     <div className="App">
       <Header />
+      <LogoutAlert/>
       <LoginModal
         handleLoggedInState={handleLoggedInState}
         isLoggedIn={isLoggedIn} />

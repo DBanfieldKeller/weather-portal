@@ -31,6 +31,7 @@ export async function updateHistory(token, searchHistory) {
         console.log("history response: ", response)
         return response
     }catch(error){
-        console.log(error)
+        console.log(error);
+        return error
     }
 };
