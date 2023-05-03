@@ -63,7 +63,9 @@ function App() {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     weatherLookup(currentLocation, units);
-    writeSearchHistory(searchHistory, currentLocation);
+    if(isLoggedIn) {
+      writeSearchHistory(searchHistory, currentLocation)
+    };
   };
 
   const handleLoggedInState = (boolean) => setIsLoggedIn(boolean);
