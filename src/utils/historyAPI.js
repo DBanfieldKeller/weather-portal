@@ -29,9 +29,15 @@ export async function updateHistory(token, searchHistory) {
     try{
         const response = await axios.put(`${URL}`, newData, config)
         console.log("history response: ", response)
-        return response
+        return {
+            response: response,
+            isTokenValid: true
+        };
     }catch(error){
-        console.log(error);
-        return error
+        console.log(error)
+        return {
+            response: error,
+            isTokenValid: false
+        }
     }
 };

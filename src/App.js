@@ -17,6 +17,7 @@ function App() {
   const [weatherData, setWeatherData] = useState({});
   const [isLoggedIn, setIsLoggedIn] = useState();
   const [searchHistory, setSearchHistory] = useState([]);
+  const [showAlert, setShowAlert] = useState(false)
 
   const weatherFormat = (output, units) => {
     const formattedOutput = formatOutput(output, units);
@@ -56,6 +57,13 @@ function App() {
     searchHistoryArray.splice(5);
     setSearchHistory(searchHistoryArray);
     updateHistory(token, searchHistory)
+    .then((res)=>{
+      if(res.isTokenValid){
+        console.log(res.response)
+      }else{
+        handleExpiredToken()
+      }
+    })
   };
 
 
@@ -68,6 +76,7 @@ function App() {
     };
   };
 
+  // logged in state setter for passing down to login modal
   const handleLoggedInState = (boolean) => setIsLoggedIn(boolean);
 
   const retrieveHistory = () => {
@@ -78,11 +87,17 @@ function App() {
         if (res.data.userData.dataValue) {
           setSearchHistory(res.data.userData.dataValue);
         }
-      }).catch((err)=> {
-        console.log(err)
       })
-
   };
+
+  const handleExpiredToken = () => {
+    setIsLoggedIn(false)
+    setShowAlert(true)
+  };
+
+  const handleAlertClose = () =>{
+    setShowAlert(false)
+  }
 
   useEffect(() => {
     if (isLoggedIn) retrieveHistory()
@@ -91,7 +106,9 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <LogoutAlert/>
+      <LogoutAlert
+        handleAlertClose={handleAlertClose}
+        showAlert={showAlert}/>
       <LoginModal
         handleLoggedInState={handleLoggedInState}
         isLoggedIn={isLoggedIn} />
