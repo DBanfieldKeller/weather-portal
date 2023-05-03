@@ -9,7 +9,13 @@ export default function SearchHistory(props) {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    // TODO: make list buttons into map function
+    const handleClick = (e) => {
+        e.preventDefault()
+        props.handleInputChange(e);
+        props.weatherLookup(e.target.value, props.units);
+        handleClose()
+    }
+
     return (
         <>
             <Button variant="primary" onClick={handleShow}>
@@ -23,7 +29,10 @@ export default function SearchHistory(props) {
                 <Modal.Body>
                     <ListGroup>
                         {props.searchHistory.map(city =>
-                            <ListGroup.Item action>
+                            <ListGroup.Item 
+                            action
+                            onClick={handleClick}
+                            value={city}>
                                 {city}
                             </ListGroup.Item>
                         )}
@@ -32,9 +41,6 @@ export default function SearchHistory(props) {
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
                         Close
-                    </Button>
-                    <Button variant="primary" onClick={handleClose}>
-                        Save Changes
                     </Button>
                 </Modal.Footer>
             </Modal>

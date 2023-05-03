@@ -48,7 +48,12 @@ export default function InputBar(props) {
             Bleat Your Weather</Button>
           {props.isLoggedIn ? 
           <SearchHistory 
-          searchHistory={props.searchHistory} /> : ""}
+          searchHistory={props.searchHistory}
+          handleFormSubmit={props.handleFormSubmit}
+          handleInputChange={props.handleInputChange}
+          currentLocation={props.currentLocation} 
+          weatherLookup={props.weatherLookup}
+          units={props.units}/> : ""}
         </Col>
       </Form.Group>
     </Form>
