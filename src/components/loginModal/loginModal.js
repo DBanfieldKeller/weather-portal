@@ -2,9 +2,7 @@ import React, { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Login from "../login/login";
-import login from "../../utils/loginAPI";
-import register from "../../utils/registerAPI";
-import verify from "../../utils/verifyAPI";
+import {login, register, verify} from "../../utils/userAPI";
 
 export default function LoginModal(props) {
   const [show, setShow] = useState(false);
