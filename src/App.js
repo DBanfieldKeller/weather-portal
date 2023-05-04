@@ -4,6 +4,7 @@ import Header from './components/header/header';
 import CurrentWeather from './components/currentWeather/currentWeather';
 import InputBar from './components/inputBar/inputBar';
 import LoginModal from './components/loginModal/loginModal';
+import LogoutAlert from './components/logoutAlert/logoutAlert';
 import getForecast from './utils/weatherAPI';
 import formatOutput from './utils/formatOutput';
 import { getHistory, updateHistory } from './utils/historyAPI';
@@ -16,6 +17,7 @@ function App() {
   const [weatherData, setWeatherData] = useState({});
   const [isLoggedIn, setIsLoggedIn] = useState();
   const [searchHistory, setSearchHistory] = useState([]);
+  const [showAlert, setShowAlert] = useState(false)
 
   const weatherFormat = (output, units) => {
     const formattedOutput = formatOutput(output, units);
@@ -55,6 +57,13 @@ function App() {
     searchHistoryArray.splice(5);
     setSearchHistory(searchHistoryArray);
     updateHistory(token, searchHistory)
+    .then((res)=>{
+      if(res.isTokenValid){
+        console.log(res.response)
+      }else{
+        handleExpiredToken()
+      }
+    })
   };
 
 
@@ -62,9 +71,12 @@ function App() {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     weatherLookup(currentLocation, units);
-    writeSearchHistory(searchHistory, currentLocation);
+    if(isLoggedIn) {
+      writeSearchHistory(searchHistory, currentLocation)
+    };
   };
 
+  // logged in state setter for passing down to login modal
   const handleLoggedInState = (boolean) => setIsLoggedIn(boolean);
 
   const retrieveHistory = () => {
@@ -76,8 +88,16 @@ function App() {
           setSearchHistory(res.data.userData.dataValue);
         }
       })
-
   };
+
+  const handleExpiredToken = () => {
+    setIsLoggedIn(false)
+    setShowAlert(true)
+  };
+
+  const handleAlertClose = () =>{
+    setShowAlert(false)
+  }
 
   useEffect(() => {
     if (isLoggedIn) retrieveHistory()
@@ -86,6 +106,9 @@ function App() {
   return (
     <div className="App">
       <Header />
+      <LogoutAlert
+        handleAlertClose={handleAlertClose}
+        showAlert={showAlert}/>
       <LoginModal
         handleLoggedInState={handleLoggedInState}
         isLoggedIn={isLoggedIn} />
