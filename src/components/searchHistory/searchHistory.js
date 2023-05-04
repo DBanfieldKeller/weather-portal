@@ -5,10 +5,12 @@ import ListGroup from "react-bootstrap/ListGroup";
 
 export default function SearchHistory(props) {
     const [show, setShow] = useState(false);
-
+    
+    // open and close search history modal
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+    // lookup weather and close modal on button click
     const handleClick = (e) => {
         e.preventDefault()
         props.handleInputChange(e);

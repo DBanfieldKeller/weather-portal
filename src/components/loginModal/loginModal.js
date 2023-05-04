@@ -2,9 +2,7 @@ import React, { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Login from "../login/login";
-import login from "../../utils/loginAPI";
-import register from "../../utils/registerAPI";
-import verify from "../../utils/verifyAPI";
+import {login, register, verify} from "../../utils/userAPI";
 
 export default function LoginModal(props) {
   const [show, setShow] = useState(false);
@@ -26,6 +24,7 @@ export default function LoginModal(props) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  // get username input and add to loginInfo state
   const handleUsernameInput = (e) => setLoginInfo(prevLoginInfo => {
     return {
       ...prevLoginInfo,
@@ -33,6 +32,7 @@ export default function LoginModal(props) {
     };
   });
 
+  // get password input and add to loginInfo state
   const handlePasswordInput = (e) => setLoginInfo(prevLoginInfo => {
     return {
       ...prevLoginInfo,
@@ -40,12 +40,13 @@ export default function LoginModal(props) {
     }
   });
 
+  // get name input and add to loginInfo state
   const handleNameInput = (e) => setLoginInfo(prevLoginInfo => {
     return {
       ...prevLoginInfo,
       name: e.target.value
     }
-  })
+  });
 
   // login function, sets welcome and error messages, sets token in session storage
   const handleLogin = (e) => {
@@ -54,8 +55,6 @@ export default function LoginModal(props) {
       username: loginInfo.username,
       password: loginInfo.password
     }).then((res) => {
-      console.log(typeof res.response);
-      console.log(res);
       if (res.isError) {
         setErrorMessage(res.response);
         setSuccessMessage("");
@@ -71,7 +70,6 @@ export default function LoginModal(props) {
   // register function, sets success and error messages
   const handleRegister = (e) => {
     e.preventDefault();
-    console.log(loginInfo)
     register({
       name: loginInfo.name,
       username: loginInfo.username,
@@ -90,12 +88,9 @@ export default function LoginModal(props) {
   // verify token function
   const verifyToken = () => {
     const token = window.sessionStorage.getItem("token");
-    console.log(token);
     verify(token)
       .then((res) => {
-        console.log(res);
         res.data?.verified ? props.handleLoggedInState(true) : props.handleLoggedInState(false);
-        console.log(props.isLoggedIn)
       })
 
   };

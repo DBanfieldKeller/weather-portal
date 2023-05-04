@@ -3,6 +3,7 @@ import Alert from 'react-bootstrap/Alert';
 
 export default function LogoutAlert(props) {
 
+    // close alert on close button click
     const closeAlert = () => props.handleAlertClose()
 
     if(props.showAlert){
