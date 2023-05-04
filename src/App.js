@@ -36,11 +36,6 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (!isLoggedIn) setSearchHistory([]);
-    console.log(searchHistory)
-  }, [isLoggedIn]);
-
-  useEffect(() => {
     console.log(searchHistory)
   }, [searchHistory])
 
@@ -99,8 +94,13 @@ function App() {
     setShowAlert(false)
   }
 
+  // pull history and write to state on login, clear history state on logout
   useEffect(() => {
-    if (isLoggedIn) retrieveHistory()
+    if (isLoggedIn) {
+      retrieveHistory()
+    }else {
+      setSearchHistory([])
+    }
   }, [isLoggedIn]);
 
   return (
