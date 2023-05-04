@@ -2,6 +2,8 @@ import axios from "axios";
 
 const URL = "https://ov0whl3p5b.execute-api.us-east-2.amazonaws.com/alpha/userdata/wghistory";
 
+
+// retrieve search history from API
 export async function getHistory(token) {
     let config ={
         headers: {
@@ -19,6 +21,7 @@ export async function getHistory(token) {
     
 };
 
+// update history on API
 export async function updateHistory(token, searchHistory) {
     let config = {
         headers: {

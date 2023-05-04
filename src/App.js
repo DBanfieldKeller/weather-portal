@@ -19,32 +19,29 @@ function App() {
   const [searchHistory, setSearchHistory] = useState([]);
   const [showAlert, setShowAlert] = useState(false)
 
+  // format weatherAPI output for writing to page
   const weatherFormat = (output, units) => {
     const formattedOutput = formatOutput(output, units);
     return (formattedOutput);
   }
 
-  // TODO: Confirm if catch actually does anything
+  //get data from API call, format and write to state 
   const weatherLookup = (currentLocation, units) => {
     getForecast(currentLocation, units)
       .then((res) => setWeatherData(weatherFormat(res, units)))
-      .catch((err) => console.log(err));
-  }
+  };
 
-  useEffect(() => {
-    weatherLookup("New York", "imperial");
-  }, []);
+  // handle city name input
+  const handleInputChange = (e) => {
+    setCurrentLocation(e.target.value)
+  };
 
-  useEffect(() => {
-    console.log(searchHistory)
-  }, [searchHistory])
-
-  const handleInputChange = (e) => setCurrentLocation(e.target.value);
-
+  // handle UoM radio buttons
   const handleUnitChange = (e) => {
     setUnits(e.target.value)
   };
 
+  // add recent search to search history array and update database
   const writeSearchHistory = (searchHistory, currentLocation) => {
     const token = window.sessionStorage.getItem("token")
     const searchHistoryArray = searchHistory
@@ -52,21 +49,20 @@ function App() {
     searchHistoryArray.splice(5);
     setSearchHistory(searchHistoryArray);
     updateHistory(token, searchHistory)
-    .then((res)=>{
-      if(res.isTokenValid){
-        console.log(res.response)
-      }else{
-        handleExpiredToken()
-      }
-    })
+      .then((res) => {
+        if (res.isTokenValid) {
+          console.log(res.response)
+        } else {
+          handleExpiredToken()
+        }
+      })
   };
 
-
-
+  // handle "bleat your weather" button
   const handleFormSubmit = (e) => {
     e.preventDefault();
     weatherLookup(currentLocation, units);
-    if(isLoggedIn) {
+    if (isLoggedIn) {
       writeSearchHistory(searchHistory, currentLocation)
     };
   };
@@ -74,6 +70,7 @@ function App() {
   // logged in state setter for passing down to login modal
   const handleLoggedInState = (boolean) => setIsLoggedIn(boolean);
 
+  // pull history from API, write to search history if data exists
   const retrieveHistory = () => {
     const token = window.sessionStorage.getItem("token");
     getHistory(token)
@@ -85,20 +82,27 @@ function App() {
       })
   };
 
+  // on token expiration, logout and display logout alert
   const handleExpiredToken = () => {
     setIsLoggedIn(false)
     setShowAlert(true)
   };
 
-  const handleAlertClose = () =>{
+  // alert message state handler for passing down to LogoutAlert component
+  const handleAlertClose = () => {
     setShowAlert(false)
   }
+
+  // default lookup on page load
+  useEffect(() => {
+    weatherLookup("New York", "imperial");
+  }, []);
 
   // pull history and write to state on login, clear history state on logout
   useEffect(() => {
     if (isLoggedIn) {
       retrieveHistory()
-    }else {
+    } else {
       setSearchHistory([])
     }
   }, [isLoggedIn]);
@@ -108,7 +112,7 @@ function App() {
       <Header />
       <LogoutAlert
         handleAlertClose={handleAlertClose}
-        showAlert={showAlert}/>
+        showAlert={showAlert} />
       <LoginModal
         handleLoggedInState={handleLoggedInState}
         isLoggedIn={isLoggedIn} />

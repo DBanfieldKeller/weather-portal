@@ -26,6 +26,7 @@ export default function LoginModal(props) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  // get username input and add to loginInfo state
   const handleUsernameInput = (e) => setLoginInfo(prevLoginInfo => {
     return {
       ...prevLoginInfo,
@@ -33,6 +34,7 @@ export default function LoginModal(props) {
     };
   });
 
+  // get password input and add to loginInfo state
   const handlePasswordInput = (e) => setLoginInfo(prevLoginInfo => {
     return {
       ...prevLoginInfo,
@@ -40,12 +42,13 @@ export default function LoginModal(props) {
     }
   });
 
+  // get name input and add to loginInfo state
   const handleNameInput = (e) => setLoginInfo(prevLoginInfo => {
     return {
       ...prevLoginInfo,
       name: e.target.value
     }
-  })
+  });
 
   // login function, sets welcome and error messages, sets token in session storage
   const handleLogin = (e) => {
