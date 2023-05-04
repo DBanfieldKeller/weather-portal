@@ -55,8 +55,6 @@ export default function LoginModal(props) {
       username: loginInfo.username,
       password: loginInfo.password
     }).then((res) => {
-      console.log(typeof res.response);
-      console.log(res);
       if (res.isError) {
         setErrorMessage(res.response);
         setSuccessMessage("");
@@ -72,7 +70,6 @@ export default function LoginModal(props) {
   // register function, sets success and error messages
   const handleRegister = (e) => {
     e.preventDefault();
-    console.log(loginInfo)
     register({
       name: loginInfo.name,
       username: loginInfo.username,
@@ -91,12 +88,9 @@ export default function LoginModal(props) {
   // verify token function
   const verifyToken = () => {
     const token = window.sessionStorage.getItem("token");
-    console.log(token);
     verify(token)
       .then((res) => {
-        console.log(res);
         res.data?.verified ? props.handleLoggedInState(true) : props.handleLoggedInState(false);
-        console.log(props.isLoggedIn)
       })
 
   };

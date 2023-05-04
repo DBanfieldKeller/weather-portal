@@ -75,7 +75,6 @@ function App() {
     const token = window.sessionStorage.getItem("token");
     getHistory(token)
       .then((res) => {
-        console.log(res);
         if (res.data.userData.dataValue) {
           setSearchHistory(res.data.userData.dataValue);
         }
