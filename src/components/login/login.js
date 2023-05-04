@@ -29,9 +29,6 @@ export default function Login(props) {
             value={props.loginInfo.password}
             onChange={props.handlePasswordInput} />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicCheckbox">
-          <Form.Check inline="true" type="checkbox" label="Remember Me" />
-        </Form.Group>
         <div className="error-message">
           {props.errorMessage}
         </div>
@@ -78,9 +75,6 @@ export default function Login(props) {
           name="pwd"
           value={props.loginInfo.password}
           onChange={props.handlePasswordInput} />
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="formBasicCheckbox">
-        <Form.Check inline="true" type="checkbox" label="Remember Me" />
       </Form.Group>
       <div className="error-message">
         {props.errorMessage}
