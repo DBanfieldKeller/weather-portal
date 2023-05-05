@@ -6,7 +6,7 @@
 ![Badge](https://img.shields.io/badge/-Axios-purple)
 
 ## Description
-This is a basic weather lookup application that uses the [OpenWeather API](https://openweathermap.org/api) to provide current weather conditions for a provided city. The application is also has login/register and search history functionality by connecting to the lambda API gateway from my [previous project](https://github.com/DBanfieldKeller/login-service). API calls are made using the Axios library.
+This is a basic weather lookup application built with the React framework that uses the [OpenWeather API](https://openweathermap.org/api) to provide current weather conditions for a provided city. The application is also has login/register and search history functionality by connecting to the lambda API gateway from my [previous project](https://github.com/DBanfieldKeller/login-service). API calls are made using the Axios library.
 
 This app is part of the Goatnet suite of applications I have created, allowing for a single account between all of the apps.
 
